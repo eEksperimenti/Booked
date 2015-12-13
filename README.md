@@ -1,2 +1,2 @@
 # Booked-
-Resource scheduling for eExperiments
+Shranjena izvorna koda rezervacijskega sistema in navodila
