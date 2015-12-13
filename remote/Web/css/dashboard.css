@@ -1,0 +1,134 @@
+body{
+	background-color:#eeeeee;
+}
+#titleLeft{
+	font-size: 20px;
+}
+#titleLeft a{
+	font-color:#0055cc;
+	text-decoration: none;
+}
+#event{
+	margin-bottom: 10px;
+	background-color: #ffffff;
+	border:1px solid #888888;
+	padding:10px 0px 10px 10px;
+	display: table;
+	width:80%;
+	height: auto;
+	min-height:80px;
+	
+
+}
+.reservationInfo{
+	float:right;
+	padding-left: 10px;
+	width:35%;
+	border-left: 1px solid #222222;
+	height:80px;
+	font-size: 13px;
+
+}
+.info{
+	width:35px;
+}
+.left{
+	float:left;
+	margin-left:0px;
+}
+.right{
+	float:right;
+	margin-left: 20px;
+}
+.dashboard {
+    margin-top: 15px;
+    width:100%;
+}
+
+.dashboardContents {
+	padding: 4px;
+
+}
+
+.dashboardHeader {
+    
+    font-size: 18px;
+    font-weight: bold;
+    padding: 2px 0px 2px 10px;
+    letter-spacing: 1px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+     
+}
+
+.dashboardHeader a
+{
+	color: #222222;
+		text-decoration: none;
+}
+
+.dashboard .noresults {
+	text-align: center;
+	font-style: italic;
+}
+
+.dashboardContents table {
+	border-collapse: collapse;
+	width:100%;
+}
+
+.dashboardContents a {
+	color: #3D72A4;
+}
+
+.dashboardContents table, .dashboardContents table td, .dashboardContents table th {
+	border: solid 1px #CCCC99;
+	text-align: left;
+	padding: 4px;
+	background-color: #F5F5F5;
+	color: #666;
+}
+
+.dashboardContents li{
+	list-style: circle;
+	margin-left: 30px;
+}
+
+.upcomingReservationsDashboard .timespan td {
+	background-color: #ececec;
+	font-style: italic;
+	color: #000;
+}
+	
+.upcomingReservationsDashboard tr.reservation.hover td {
+	cursor: pointer;
+	background-color: #FEFEFE;
+	color: #222;
+}
+
+.upcomingReservationsDashboard tr.reservation.clicked td {
+	cursor: pointer;
+	background-color: #F0F0F0;
+}
+
+#availabilityDashboard .header {
+	font-size:1.1em;
+	margin-top: 8px;
+}
+
+#availabilityDashboard .header:first-of-type {
+	margin-top:0;
+}
+
+#availabilityDashboard .resourceName {
+	min-width:150px;
+	max-width:250px;
+	display:inline-block;
+}
+
+#availabilityDashboard .availability {
+	width:350px;
+	display:inline-block;
+}

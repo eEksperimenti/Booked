@@ -1,0 +1,39 @@
+Namestitev strežnika za rezervacije oddaljenih eksperimentov:
+-------------------------------------------------------------
+
+- strežnik temelji na sistemu Booked Scheduler (https://www.bookedscheduler.com/) in je ustrezno prirejen za rezervacijo oddaljenih eksperimentov
+  -- avtentikacija uporabnikov poteka preko AAI, zato mora biti na strežniku nameščen Shibboleth
+
+- vse datoteke (celotno direktorijsko strukturo) prekopiramo na spletni strežnik v korenski direktorij, ki je pod SSL (direktorij remote)
+- vse datoteke morajo biti od www-data:
+    sudo chown -R www-data:www-data remote
+- dodelimo write access direktorijema /your-booked/tpl_c in /your-booked/tpl:
+    sudo chmod 755 -R your-booked/tpl_c
+	sudo chmod 755 -R your-booked/tpl
+- PHP session.autostart mora biti disabled (to je privzeto, a vseeno preveri)
+- web-server mora imeti read/write access do direktorija uploads (nastavljen v $conf['settings']['image.upload.directory'], privzeto Web/uploads/images)
+    sudo chmod 755 -R Web/uploads/images
+
+- odpri datoteko /config/config.php in ustrezno spremeni nastavitve glede na namestitev (NUJNO: dostop do baze - ime in geslo, e-pošni naslov administratorja)
+
+- nastavitve baze mysql (najbolje preko phpmyadmin)
+  -- ustvari novo bazo z imenom eeksperimenti_bs (če je ime drugo, ustrezno spremeni config.php)
+  -- uvozi tabele iz database_schema/eeksperimenti_bs.sql (baza z že nastavljenimi RedPitayami in administratorjem, ki ga je potrebno spremeniti)
+  -- določi email aministratorja: uredi uporabnika Admin v tabeli users (e-poštni naslov se mora ujemati s tistim v config.php)
+
+- v mysql nastavi uporabnika, preko katerega se povežemo na bazo s strežnika za oddaljene eksperimente (preverjanje veljavnosti žetona administratorja eksperimenta):
+  -- v mysql dodaj uporabnika remotePitaya, ki ima nad bazo za eksperimente vse pravice
+     --- odpri phpmyadmin, dodaj uporabnika remotePitaya:
+		 uporabnik: remotePitaya
+		 gostitelj: 194.249.0.27
+		 brez globalnih privilegijev
+		 privilegiji na bazi eeksperimenti_bs: ALL PRIVILEGES
+		 privilegij za administracijo: GRANT = ne
+		 geslo uporabnika je poljubno, a se mora ujemati s tistim, ke se uporabi v sistemu za oddaljene eksperimente za dostop do baze
+	 --- uporabnika kopiraj, tako da dobiš še uporabnike še za druge gostitelje:
+	     remotePitaya@212.235.190.181
+	     remotePitaya@212.235.190.179
+	     remotePitaya@localhost 
+  -- v konfiguracijski datoteki od mysql (/etc/mysql/my.cnf) zakomentiraj bind-address, tako da dostop ne bo omejen le na localhost
+         #bind-address = 127.0.0.1
+  -- restartaj servis mysql: sudo service mysql restart
